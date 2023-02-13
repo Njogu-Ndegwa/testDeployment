@@ -65,14 +65,17 @@ jobs:
       - name: Build app
         run: yarn build 
         
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
+    - name: Sync Files
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+
+      with:
           username: taskmoby
           server: 13.82.81.185
+          port: 22
+          local_path: './dist'
+          remote_path: './sites/testDeployApp'
+          sftp_only: true
           password: InfomobySmartData2023!!
-          source: ./dist/test-deploy-app/*
-          target: ./sites/testDeployApp
 
           # script: |
           #   cd /path/to/server
