@@ -65,21 +65,21 @@ jobs:
       - name: Build app
         run: yarn build 
         
-    - name: Sync Files
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Sync Files
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
 
-      with:
-          username: taskmoby
-          server: 13.82.81.185
-          port: 22
-          local_path: './dist'
-          remote_path: './sites/testDeployApp'
-          sftp_only: true
-          password: InfomobySmartData2023!!
+        with:
+            username: taskmoby
+            server: 13.82.81.185
+            port: 22
+            local_path: './dist'
+            remote_path: './sites/testDeployApp'
+            sftp_only: true
+            password: InfomobySmartData2023!!
 
-          # script: |
-          #   cd /path/to/server
-          #   git pull
-          #   cd browser
-          #   pm2 stop server.js
-          #   pm2 start server.js
+            # script: |
+            #   cd /path/to/server
+            #   git pull
+            #   cd browser
+            #   pm2 stop server.js
+            #   pm2 start server.js
