@@ -1,0 +1,47 @@
+name: Deploy Test Site on push
+
+on: 
+  push:
+    branches: 
+      - master
+      
+jobs:
+  web-deploy:
+
+    name: Deploy Angular App
+    runs-on: ubuntu-latest
+
+    # env:
+    #   SERVER: waws-prod-ln1-025.ftp.azurewebsites.windows.net
+
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v3
+
+    - name: Use Node.js 18 LTS
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+      
+      
+    - name: Install NPM Modules
+      run: yarn install 
+      
+
+      
+
+    - name: Build Project
+      run: yarn build
+    
+    - name: Sync Files
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+
+
+      with:
+          username: taskmoby
+          server: 13.82.81.185
+          port: 22
+          local_path: '.'
+          remote_path: './sites/testDeployment'
+          sftp_only: true
+          password: InfomobySmartData2023!!
